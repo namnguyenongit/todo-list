@@ -1,0 +1,44 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "data": {
+        "isPending": true,
+        "isOutdated": false,
+        "isFinished": false,
+        "date": "12/9/2021",
+        "jobs": "Finish this todo list application!"
+      }
+    },
+    {
+      "id": 2,
+      "data": {
+        "isPending": true,
+        "isOutdated": false,
+        "isFinished": false,
+        "date": "31/12/2100",
+        "jobs": "Land my crush!"
+      }
+    },
+    {
+      "id": 3,
+      "data": {
+        "isPending": false,
+        "isOutdated": false,
+        "isFinished": true,
+        "date": "12/9/2020",
+        "jobs": "Acquire 3.0 GPA"
+      }
+    },
+    {
+      "id": 4,
+      "data": {
+        "isPending": false,
+        "isOutdated": true,
+        "isFinished": false,
+        "date": "10/3/2021",
+        "jobs": "Got interview before summer"
+      }
+    }
+  ]
+}
