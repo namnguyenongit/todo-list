@@ -26,29 +26,29 @@ function PendingTasks({ pendingTasks }) {
       task.id === parseInt(id) ? { ...task, isChecked: checked } : task
     )
     setIds([...ids, parseInt(id)])
-    console.log(ids)
     setTasks(tempTasks)
+    console.log([tasks])
   }
 
   // Handle delete, handle mark as finished
-  const handleDelete = (ids) => {
-    if (ids) {
-      ids.forEach((id) => {
-        fetch('http://localhost:8080/tasks' + id, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then(console.log(`Id: ${id} deleted`))
-          .catch(console.log(`Id: ${id} can't be deleted`))
+  const handleDelete = () => {
+    tasks &&
+      tasks.forEach((task) => {
+        if (task.isChecked) {
+          fetch('http://localhost:8080/tasks/' + task.id, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            // Handle multi delete, handle error after delete
+            .then(console.log(`Id: ${task.id} deleted`))
+            .catch(console.log(`Id: ${task.id} can't be deleted`))
+        }
       })
-    } else {
-      alert('Chose a task to delete first!')
-    }
   }
 
-  const handleMarkFinished = (ids) => {
+  const handleMarkFinished = (tasks) => {
     console.log('handleMarkFinished')
   }
 
