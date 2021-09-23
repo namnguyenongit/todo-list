@@ -52,11 +52,11 @@
     },
     {
       "data": {
-        "date": "2021-09-22",
-        "jobs": "Some shit to delete",
-        "isPending": true,
+        "date": "2021-09-12",
+        "jobs": "Do something",
+        "isPending": false,
         "isOutdated": false,
-        "isFinished": false
+        "isFinished": true
       },
       "id": 6
     }

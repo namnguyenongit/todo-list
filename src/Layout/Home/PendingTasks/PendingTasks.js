@@ -1,4 +1,4 @@
-import styles from './TasksFormat.module.css'
+import styles from './PendingTasks.module.css'
 import { useEffect, useState } from 'react'
 
 function PendingTasks({ pendingTasks }) {
@@ -27,7 +27,7 @@ function PendingTasks({ pendingTasks }) {
     )
     setIds([...ids, parseInt(id)])
     setTasks(tempTasks)
-    console.log([tasks])
+    // console.log([tasks])
   }
 
   // Handle delete, handle mark as finished
@@ -41,15 +41,49 @@ function PendingTasks({ pendingTasks }) {
               'Content-Type': 'application/json',
             },
           })
-            // Handle multi delete, handle error after delete
-            .then(console.log(`Id: ${task.id} deleted`))
-            .catch(console.log(`Id: ${task.id} can't be deleted`))
+            .then((res) => {
+              res.json()
+            })
+            .then(() => {
+              window.location.reload(false)
+              console.log(`Id: ${task.id} deleted`)
+            })
+            .catch((e) => {
+              console.log(`Id: ${task.id} can't be deleted`)
+              console.log(e)
+            })
         }
       })
   }
 
-  const handleMarkFinished = (tasks) => {
-    console.log('handleMarkFinished')
+  const handleMarkFinished = () => {
+    tasks &&
+      tasks.forEach((task) => {
+        if (task.isChecked) {
+          const data = {
+            data: {
+              date: task.data.date,
+              jobs: task.data.jobs,
+              isPending: false,
+              isOutdated: false,
+              isFinished: true,
+            },
+          }
+          fetch('http://localhost:8080/tasks/' + task.id, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then(() => {
+              window.location.reload(false)
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+        }
+      })
   }
 
   const catalog =
@@ -74,21 +108,24 @@ function PendingTasks({ pendingTasks }) {
       <div className={styles['top']}>
         <h2 className={styles['title']}>Pending tasks</h2>
         <div>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={handleMarkFinished}>Mark as finished</button>
-        </div>
-        <div>
-          <span>Select all</span>
-          <input
-            type="checkbox"
-            id="selectAll"
-            checked={
-              (tasks &&
-                tasks.filter((task) => task?.isChecked !== true).length < 1) ||
-              false
-            }
-            onChange={handleSelectAll}
-          ></input>
+          <div className={styles['select-all']}>
+            <span>Select all</span>
+            <input
+              type="checkbox"
+              id="selectAll"
+              checked={
+                (tasks &&
+                  tasks.filter((task) => task?.isChecked !== true).length <
+                    1) ||
+                false
+              }
+              onChange={handleSelectAll}
+            ></input>
+          </div>
+          <div className={styles['options']}>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleMarkFinished}>Mark as finished</button>
+          </div>
         </div>
       </div>
       <div className={styles['wrapper']}>{catalog}</div>
