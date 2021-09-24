@@ -1,19 +1,16 @@
-import styles from './PendingTasks.module.css'
+import styles from './OutdatedTasks.module.css'
 import { useEffect, useState } from 'react'
 
-function PendingTasks({ pendingTasks }) {
+function OutdatedTasks({ outdatedTasks }) {
   const [tasks, setTasks] = useState(null)
-  const [ids, setIds] = useState([])
 
   useEffect(() => {
-    setTasks(pendingTasks)
-  }, [pendingTasks])
+    setTasks(outdatedTasks)
+  }, [outdatedTasks])
 
   // Handle select and select all
   function handleSelectAll(e) {
-    // OK
     const { checked } = e.target
-    setIds(checked ? tasks.map((task) => task.id) : [])
     let tempTasks = tasks.map((task) => {
       return { ...task, isChecked: checked }
     })
@@ -25,12 +22,9 @@ function PendingTasks({ pendingTasks }) {
     let tempTasks = tasks.map((task) =>
       task.id === parseInt(id) ? { ...task, isChecked: checked } : task
     )
-    setIds([...ids, parseInt(id)])
     setTasks(tempTasks)
-    // console.log([tasks])
   }
 
-  // Handle delete, handle mark as finished
   const handleDelete = () => {
     tasks &&
       tasks.forEach((task) => {
@@ -44,44 +38,8 @@ function PendingTasks({ pendingTasks }) {
             .then((res) => {
               res.json()
             })
-            .then(() => {
-              window.location.reload(false)
-              console.log(`Id: ${task.id} deleted`)
-            })
-            .catch((e) => {
-              console.log(`Id: ${task.id} can't be deleted`)
-              console.log(e)
-            })
-        }
-      })
-  }
-
-  const handleMarkFinished = () => {
-    tasks &&
-      tasks.forEach((task) => {
-        if (task.isChecked) {
-          const data = {
-            data: {
-              date: task.data.date,
-              jobs: task.data.jobs,
-              isPending: false,
-              isOutdated: false,
-              isFinished: true,
-            },
-          }
-          fetch('http://localhost:8080/tasks/' + task.id, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-            .then(() => {
-              window.location.reload(false)
-            })
-            .catch((e) => {
-              console.log(e)
-            })
+            .then(() => window.location.reload(false))
+            .catch((e) => console.log('[Fetch error at OutdatedTasks]:\n' + e))
         }
       })
   }
@@ -106,7 +64,7 @@ function PendingTasks({ pendingTasks }) {
   return (
     <div>
       <div className={styles['top']}>
-        <h2 className={styles['title']}>Pending tasks</h2>
+        <h2 className={styles['title']}>Outdated Tasks</h2>
         <div>
           <div className={styles['select-all']}>
             <span>Select all</span>
@@ -124,7 +82,6 @@ function PendingTasks({ pendingTasks }) {
           </div>
           <div className={styles['options']}>
             <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleMarkFinished}>Mark as finished</button>
           </div>
         </div>
       </div>
@@ -133,4 +90,4 @@ function PendingTasks({ pendingTasks }) {
   )
 }
 
-export default PendingTasks
+export default OutdatedTasks

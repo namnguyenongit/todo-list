@@ -23,16 +23,16 @@ function CreateTask() {
       body: JSON.stringify(data),
     })
       .then(() => {
-        setTask('')
-        setDate('')
+        setTask(null)
+        setDate(null)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => console.log('[Create tasks error]:\n' + e))
   }
 
   return (
     <div className={styles['cover']}>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form className={styles['form-control']} onSubmit={handleSubmit}>
+        <div className={styles['input-cover']}>
           <p>Date</p>
           <input
             required
@@ -40,7 +40,7 @@ function CreateTask() {
             type="date"
           ></input>
         </div>
-        <div>
+        <div className={styles['input-cover']}>
           <p>Tasks</p>
           <input
             required
@@ -48,7 +48,7 @@ function CreateTask() {
             type="text"
           ></input>
         </div>
-        <div>
+        <div className={styles['button-cover']}>
           <button>Submit</button>
         </div>
       </form>
