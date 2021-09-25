@@ -44,12 +44,20 @@ function FinishedTasks({ finishedTasks }) {
       })
   }
 
+  const formatDate = (input) => {
+    var datePart = input.match(/\d+/g),
+      year = datePart[0].substring(0), // get only two digits
+      month = datePart[1],
+      day = datePart[2]
+    return day + '/' + month + '/' + year
+  }
+
   const catalog =
     tasks &&
     tasks.map((task) => (
       <div key={task.id} className={styles['items']}>
         <div className={styles['date']}>
-          <div>{task.data.date}</div>
+          <div>{formatDate(task.data.date)}</div>
           <input
             type="checkbox"
             id={task.id}

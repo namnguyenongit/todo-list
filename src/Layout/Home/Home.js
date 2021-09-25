@@ -14,6 +14,15 @@ function Home() {
         return res.json()
       })
       .then((data) => {
+        let thisDate = new Date()
+        data.forEach((d) => {
+          let currentDate = new Date(d.data.date)
+          if (thisDate > currentDate && !d.data.isFinished) {
+            d.data.isPending = false
+            d.data.isOutdated = true
+            d.data.isFinished = false
+          }
+        })
         setPendingTasks(data.filter((d) => d.data.isPending))
         setOutdatedTasks(data.filter((d) => d.data.isOutdated))
         setFinishedTasks(data.filter((d) => d.data.isFinished))
