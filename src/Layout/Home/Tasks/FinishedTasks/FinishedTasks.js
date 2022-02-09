@@ -59,7 +59,7 @@ function FinishedTasks({ finishedTasks }) {
         <div className={styles['date']}>
           <div>{formatDate(task.data.date)}</div>
           <input
-            type="checkbox"
+            type='checkbox'
             id={task.id}
             checked={task?.isChecked || false}
             onChange={handleSelect}
@@ -77,8 +77,8 @@ function FinishedTasks({ finishedTasks }) {
           <div className={styles['select-all']}>
             <span>Select all</span>
             <input
-              type="checkbox"
-              id="selectAll"
+              type='checkbox'
+              id='selectAll'
               checked={
                 (tasks &&
                   tasks.filter((task) => task?.isChecked !== true).length <

@@ -1,5 +1,5 @@
 .navbar {
-  background-color: antiquewhite;
+  background-color: #51a1eb;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -20,9 +20,9 @@
 .app-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: rgb(246, 130, 130);
+  color: #fff;
 }
 .links {
   font-size: 1rem;
-  color: rgb(246, 130, 130);
+  color: #fff;
 }

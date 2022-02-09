@@ -28,22 +28,11 @@ input:focus {
 }
 
 .button-cover {
-  display: flex;
   margin-top: 1rem;
-  width: 100%;
-  flex-direction: row-reverse;
-}
-
-button {
-  background-color: #fff;
-  border: 1px solid #fff;
+  background-color: rgb(119, 245, 239);
+  border: none;
   border-radius: 5px;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
   padding: 0.5rem 1.2rem;
   font-weight: 600;
-}
-
-button:hover {
-  cursor: pointer;
-  box-shadow: 0 3px 5px 0 rgba(65, 29, 29, 0.5);
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react/cjs/react.development'
+import { useState } from 'react'
 import styles from './createTask.module.css'
 
 function CreateTask() {
@@ -10,8 +10,8 @@ function CreateTask() {
       data: {
         date: date,
         jobs: task,
-        isPending: true,
-        isOutdated: false,
+        isPending: !checkDate(date),
+        isOutdated: checkDate(date),
         isFinished: false,
       },
     }
@@ -23,10 +23,22 @@ function CreateTask() {
       body: JSON.stringify(data),
     })
       .then(() => {
-        setTask(null)
-        setDate(null)
+        setTask('')
+        setDate('')
+        alert('Task created!')
       })
       .catch((e) => console.log('[Create tasks error]:\n' + e))
+  }
+
+  //check if date expired, return true or false
+  function checkDate(date) {
+    let thisDate = new Date()
+    let currentDate = new Date(date)
+    if (thisDate > currentDate) {
+      return true
+    } else {
+      return false
+    }
   }
 
   return (
@@ -37,7 +49,7 @@ function CreateTask() {
           <input
             required
             onChange={(e) => setDate(e.target.value)}
-            type="date"
+            type='date'
           ></input>
         </div>
         <div className={styles['input-cover']}>
@@ -45,12 +57,14 @@ function CreateTask() {
           <input
             required
             onChange={(e) => setTask(e.target.value)}
-            type="text"
+            type='text'
           ></input>
         </div>
-        <div className={styles['button-cover']}>
-          <button>Submit</button>
-        </div>
+        <input
+          type={'submit'}
+          className={styles['button-cover']}
+          value={'Submit'}
+        />
       </form>
     </div>
   )
