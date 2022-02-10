@@ -1,9 +1,26 @@
-# Todo list with React and Json server REST API
+# My To-do list
 
-To run this project, please first run `json-server --watch db.json --port 8080` then run `npm start` or `yarn start`
+## Available Scripts
 
-## Main features
+In the project directory, you can run:
 
-- Create, mark as finished, delete a To-do
+`json-server --watch db.json --port 8080`
+
+Runs the `Json server` fake REST API on **port 8080** which is used in the application.\
+Open <http://localhost:8080/blogs> to view the data in the browser.
+
+`yarn start` or `npm start`
+
+Runs the app in the development mode.\
+Open <http://localhost:3000> to view it in the browser.
+
+## Features
+
+- Create, delete, mark as finished a to-do and save changes through API
 - Provide 3 sections: Pending, Finished and Outdated task
 - Auto mark as `outdated` if date expired
+
+## Technologies
+
+- `ReactJS`
+- `React router dom`

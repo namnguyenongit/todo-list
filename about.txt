@@ -1,7 +1,0 @@
-Requirement:
-
-#1: Be able to render a list of tasks to do, sort by date
-
-#2: Add new, delete, update tasks
-
-#3: Auto arrange tasks to 'Pending', 'Finished', 'Outdated'
